@@ -1,6 +1,14 @@
 <script>
   export let name;
   var ws; // Websocket
+  // Default websocket address on non routable network
+  var wsAddress = "ws://192.168.0.10:8080";
+  $: {
+    logger('Saving WS Address');
+    localStorage.setItem('wsaddress',wsAddress);
+    if (ws != undefined) ws.close();
+    initWS();
+  }
   let state = "";
   var readyState = 0;
 
@@ -17,7 +25,8 @@
 
   var usingCordova = false;
 
-  if ("usingCordova" in window) {
+  if ("usingCordova" in window) {;
+
     usingCordova = true;
     logger('Using cordova');
   } else {
@@ -49,14 +58,17 @@
     });
   }
 
-  function getWsAddress(forcePrompt) {
+  function getWsAddress() {
     var address = localStorage.getItem('wsaddress');
-    if (address == null || address == ""  || forcePrompt) {
-      
-      address = prompt('Web Socket address:', address == null ? '' : address);
-      localStorage.setItem('wsaddress',address);
+    logger('Address from local storage = ' + address);
+    if (address == null || address == "") {
+      // First call, use the default websocket address
+      localStorage.setItem('wsaddress',wsAddress);
+    } else {
+      // use the stored address
+      wsAddress = address;
     }
-    return address;
+    logger("WS Address = " + wsAddress);
   }
 
   function initWS() {
@@ -72,8 +84,8 @@
       // alert("WebSocket is supported by your Browser!");
       // Let us open a web socket
       logger('Opening WS');
-      var address = getWsAddress();
-      ws = new WebSocket(address)
+      getWsAddress();
+      ws = new WebSocket(wsAddress)
       
       logger('Opening WS done');
 
@@ -133,6 +145,7 @@
   import Icon from "smelte/src/components/Icon";
   import ProgressCircular from "smelte/src/components/ProgressCircular";
   import { Spacer } from "smelte/src/components/Util";
+  import { TextField } from "smelte";
 
   const menu = [
     { to: "remote", text: "Telecommande" },
@@ -489,7 +502,7 @@
       Device serial : {device.serial}<br />
     </p>
     {/if}
-    <Button on:click={() => { getWsAddress(true); ws.close(); initWS();}}>WS Address</Button>
+    <TextField label="Websocket server" bind:value={wsAddress}></TextField>
     <Button on:click={() => { navigator.vibrate(500) ; alert(ws.readyState)}}>WS Status</Button>
     <p>WS readyState : {ws.readyState}</p>
     <p>Item in queue : {msgQueue.length}</p>
