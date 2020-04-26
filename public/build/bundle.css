@@ -1,0 +1,4 @@
+.reverse.svelte-zzky5a{transform:rotate(180deg)}.tip.svelte-zzky5a{transform:rotate(90deg)}
+.drawer.svelte-12w8ugb{min-width:250px}aside.svelte-12w8ugb{height:calc(100vh - 4rem)}
+.circular.svelte-1xkiyez{animation:svelte-1xkiyez-rotate 2s linear infinite;position:relative}.path.svelte-1xkiyez{stroke-dasharray:1, 200;stroke-dashoffset:0;stroke-linecap:round;animation:svelte-1xkiyez-dash 1.5s ease-in-out infinite}@keyframes svelte-1xkiyez-rotate{100%{transform:rotate(360deg)}}@keyframes svelte-1xkiyez-dash{0%{stroke-dasharray:1, 200;stroke-dashoffset:0}50%{stroke-dasharray:89, 200;stroke-dashoffset:-35}100%{stroke-dasharray:89, 200;stroke-dashoffset:-124}}
+.center.svelte-1aapdha{display:flex;align-items:center;justify-content:center}

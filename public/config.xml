@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.arg.telec" android-versionCode="202004" version="1.0.0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="https://phonegap.com/ns/1.0">
+	<name>Telec</name>
+	<description>
+		Telecommande.
+	</description>
+
+	<author email="alain.roghi@gmail.com" href="https://www.art-dashboard.com">
+	   ART Dashboard Team
+	</author>
+
+	<preference name="phonegap-version" value="cli-9.0.0" />
+
+    <platform name="android" />
+
+    <content src="index.html" />
+
+
+
+    <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
+
+    <!-- Customize your app and platform with the preference element. -->
+    <preference name="orientation"                value="default" />        <!-- all: default means both landscape and portrait are enabled -->
+    <preference name="target-device"              value="universal" />      <!-- all: possible values handset, tablet, or universal -->
+    <preference name="fullscreen"                 value="false" />           <!-- all: hides the status bar at the top of the screen -->
+    <preference name="android-installLocation"    value="auto" />           <!-- android: app install location. 'auto' will choose. 'internalOnly' is device memory. 'preferExternal' is SDCard. -->
+
+    <icon src="favicon.png" />
+ 
+    <splash src="splash.png" />
+    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="SplashMaintainAspectRatio" value="true" />
+    <preference name="SplashShowOnlyFirstTime" value="true" />
+    <preference name="SplashScreenSpinnerColor" value="white" />
+
+    <access origin="*" />  <!-- a wildcard access tag allows access to all external resource. -->
+    <allow-navigation href="*"/>
+    <allow-intent href="*" />
+
+    <plugin name="cordova-plugin-device" />
+    <plugin name="cordova-plugin-globalization" />
+    <plugin name="cordova-plugin-whitelist" />
+    <plugin name="cordova-plugin-splashscreen" />
+    <plugin name="cordova-plugin-vibration" />
+
+</widget>
