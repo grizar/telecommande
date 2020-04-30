@@ -186,6 +186,7 @@
     align-items: center;
     justify-content: center;
   }
+
 </style>
 
 <AppBar class="bg-blue-400">
