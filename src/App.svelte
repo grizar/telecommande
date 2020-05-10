@@ -3,12 +3,6 @@
   var ws; // Websocket
   // Default websocket address on non routable network
   var wsAddress = "ws://192.168.0.10:8080";
-  $: {
-    logger('Saving WS Address');
-    localStorage.setItem('wsaddress',wsAddress);
-    if (ws != undefined) ws.close();
-    initWS();
-  }
   let state = "";
   var readyState = 0;
 
@@ -69,6 +63,13 @@
       wsAddress = address;
     }
     logger("WS Address = " + wsAddress);
+  }
+
+  function saveWsAddress() {
+    logger('Saving WS Address');
+    localStorage.setItem('wsaddress',wsAddress);
+    if (ws != undefined) ws.close();
+    initWS();
   }
 
   function initWS() {
@@ -504,6 +505,7 @@
     </p>
     {/if}
     <TextField label="Websocket server" bind:value={wsAddress}></TextField>
+    <Button on:click={saveWsAddress}>Save WS address</Button>
     <Button on:click={() => { navigator.vibrate(500) ; alert(ws.readyState)}}>WS Status</Button>
     <p>WS readyState : {ws.readyState}</p>
     <p>Item in queue : {msgQueue.length}</p>
